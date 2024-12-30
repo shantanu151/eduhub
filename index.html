@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education Website</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle, #e6f7ff, #b3d9ff);
+        overflow-x: hidden;
+
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .left {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .navbar .center {
+            display: flex;
+            gap: 15px;
+        }
+
+        .navbar .center a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar .center a:hover {
+            background-color: #0056b3;
+        }
+
+        .navbar .right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .navbar .right input[type="text"] {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .navbar .right button {
+            padding: 6px 12px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .navbar .right button:hover {
+            background-color: #003f7f;
+        }
+
+        .menu-button {
+            display: none;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .menu {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            background-color: #007BFF;
+            padding: 10px;
+            position: absolute;
+            top: 48px;
+            right: 1px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+        }
+
+        .menu a:hover {
+            background-color: #0056b3;
+        }
+
+        .menu input[type="text"] {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            margin-bottom: 10px;
+        }
+
+        .menu button {
+            padding: 6px 12px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .menu.open {
+            display: flex;
+        }
+
+        /* For small screens */
+        @media (max-width: 768px) {
+            .navbar .center, .navbar .right {
+                display: none;
+            }
+
+            .menu-button {
+                display: block;
+            }
+        }
+
+        /* For large screens */
+        @media (min-width: 769px) {
+            .menu-button {
+                display: none;
+            }
+
+            .menu {
+                display: none; /* Hide the menu completely */
+            }
+
+            .navbar .center {
+                display: flex; /* Show the center links */
+            }
+
+            .navbar .right {
+                display: flex; /* Show the search bar */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .menu-button {
+                padding: 6px 12px;
+            }
+
+            .menu a {
+                font-size: 14px;
+            }
+
+            .menu input[type="text"] {
+                width: 88%;
+            }
+        }
+
+        .footer {
+      position: fixed;
+      bottom: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50%;
+      background-color: #007BFF;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px 0;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+      border-radius: 10px 10px 10px 10px;
+    }
+
+    .footer button {
+      background-color: #007BFF;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 15px;
+      font-size: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .footer button:hover {
+      background-color: #007BFF;
+      color: #ffffff;
+    }
+
+    @media (max-width: 768px) {
+      .footer {
+        width: 90%;
+      }
+
+      .footer button {
+        font-size: 12px;
+        padding: 8px 10px;
+      }
+    }
+    .main-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-section h1 {
+            font-size: 4rem;
+            margin: 0;
+            color: #003366;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .main-section p {
+            font-size: 1.8rem;
+            margin: 20px 0;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+            animation: slideIn 2s ease-in-out;
+        }
+
+        .cta-buttons {
+            margin-top: 30px;
+        }
+
+        .cta-buttons a {
+            text-decoration: none;
+            padding: 15px 40px;
+            margin: 10px;
+            font-size: 1.3rem;
+            background: linear-gradient(45deg, #1a8cff, #0066cc);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .cta-buttons a:hover {
+            background: linear-gradient(45deg, #66b3ff, #007acc);
+            transform: scale(1.1) rotate(-2deg);
+            box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .main-section img {
+            width: 80%;
+            max-width: 600px;
+            border-radius: 20px;
+            margin-top: 30px;
+            box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+            transform: perspective(800px) rotateX(10deg);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .background-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .background-elements span {
+            position: absolute;
+            display: block;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            animation: move 15s linear infinite;
+        }
+
+        .background-elements .bubble {
+            width: 80px;
+            height: 80px;
+            background: rgba(100, 149, 237, 0.6);
+            animation-duration: 10s;
+        }
+
+        .background-elements .shape {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #4682b4, #5f9ea0);
+            border-radius: 15%;
+            animation: rotate 25s linear infinite;
+        }
+
+        .background-elements .ring {
+            width: 200px;
+            height: 200px;
+            border: 4px solid rgba(70, 130, 180, 0.8);
+            border-radius: 50%;
+            animation: pulse 5s infinite;
+        }
+
+        .background-elements .square {
+            position: absolute;
+            display: block;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #1e90ff, #4682b4);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            animation: resizeRotate 12s linear infinite;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: perspective(800px) rotateX(10deg) translateY(0); }
+            50% { transform: perspective(800px) rotateX(10deg) translateY(-20px); }
+        }
+
+        @keyframes move {
+            0% {
+                transform: translateY(0px) translateX(0px);
+            }
+            50% {
+                transform: translateY(-700px) translateX(400px);
+            }
+            100% {
+                transform: translateY(0px) translateX(0px);
+            }
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes resizeRotate {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+            }
+            50% {
+                transform: scale(1.5) rotate(180deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .main-section p {
+                font-size: 1.2rem;
+            }
+
+            .cta-buttons a {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-section img {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="left">EduPlatform</div>
+    <div class="center">
+        <a href="/index.html">Home</a>
+        <a href="/courses.html">All Subjects</a>
+        <a href="/graded.html">Graded A. Solution</a>
+        <a href="/about.html">About</a>
+    </div>
+    <div class="right">
+        <input type="text" placeholder="Search courses..." id="searchInput">
+        <button onclick="searchCourse()">Search</button>
+    </div>
+    <button class="menu-button" onclick="toggleMenu()">Menu</button>
+    <div class="menu" id="menu">
+        <a href="/index.html">Home</a>
+        <a href="/courses.html">All Subjects</a>
+        <a href="/graded.html">Graded A. Solution</a>
+        <a href="/about.html">About</a>
+        <input type="text" placeholder="Search courses..." id="menuSearchInput">
+        <button onclick="searchCourse()">Search</button>
+    </div>
+</div>
+<div id="courses" style="padding: 20px; display: none;">
+    <h1>Courses</h1>
+    <ul>
+        <li>Web Development</li>
+        <li>Data Science</li>
+        <li>Machine Learning</li>
+        <li>Digital Marketing</li>
+        <li>Graphic Design</li>
+    </ul>
+</div>
+<div class="main-section">
+    <h1>Welcome to the Future of Learning</h1>
+    <p>Discover AI-powered courses and tools designed to elevate your knowledge.</p>
+    <div class="cta-buttons">
+        <a href="#courses">Start Now</a>
+        <a href="#ai">Explore AI Tools</a>
+    </div>
+    <img src="/folder/DALL·E 2024-12-28 16.04.23 - A futuristic education concept depicted in a visually stunning and artistic 3D digital illustration. The scene shows a sleek, modern classroom with ho.webp" alt="Futuristic Education">
+</div>
+
+<div class="background-elements">
+    <span class="bubble" style="left:5%; top:10%; animation-delay: 2s;"></span>
+    <span class="bubble" style="left:25%; top:20%; animation-delay: 4s;"></span>
+    <span class="bubble" style="left:50%; top:40%; animation-delay: 3s;"></span>
+    <span class="bubble" style="left:75%; top:30%; animation-delay: 1s;"></span>
+    <span class="bubble" style="left:90%; top:15%; animation-delay: 6s;"></span>
+    <span class="shape" style="left:10%; top:50%; animation-delay: 3s;"></span>
+    <span class="shape" style="left:60%; top:70%; animation-delay: 5s;"></span>
+    <span class="ring" style="left:40%; top:30%; animation-delay: 2s;"></span>
+    <span class="ring" style="left:70%; top:50%; animation-delay: 4s;"></span>
+    <span class="square" style="left:15%; top:60%; animation-delay: 2s;"></span>
+    <span class="square" style="left:80%; top:20%; animation-delay: 4s;"></span>
+    <span class="square" style="left:45%; top:10%; animation-delay: 6s;"></span>
+</div>
+
+<div class="footer">
+    <button><a href="/notes.html" style="color: white; text-decoration: none;">Notes</a></button>
+    <button><a href="/cgpacalc.html" style="color: white; text-decoration: none;">CGPA Calculator</a></button>
+    <button><a href="/gradecalc.html" style="color: white; text-decoration: none;">Grade Calculator</a></button>
+    <button><a href="#telegram" style="color: white; text-decoration: none;">Telegram Group</a></button>
+    <button><a href="todolist.html" style="color: white; text-decoration: none;">To do List</a></button>
+  </div>
+
+
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById('menu');
+        menu.classList.toggle('open');
+    }
+
+    function searchCourse() {
+        const searchInput = document.getElementById('searchInput').value.toLowerCase();
+        const courses = ["web development", "data science", "machine learning", "digital marketing", "graphic design"];
+        
+        if (courses.includes(searchInput)) {
+            alert(`You searched for: ${searchInput}. Redirecting to the courses section...`);
+            document.getElementById('courses').style.display = 'block';
+            window.location.href = '/courses.html';
+        } else {
+            alert('Course not found. Please try again!');
+        }
+    }
+</script>
+
+</body>
+</html>

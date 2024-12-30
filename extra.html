@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futuristic Video Platform</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffffff, #d9eafc);
+            color: #000;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(90deg, #1e90ff, #87cefa);
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            font-size: 2.5em;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .main-video {
+            flex: 3;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            perspective: 1000px;
+        }
+
+        .main-video iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transform: rotateY(2deg);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .main-video iframe:hover {
+            transform: rotateY(0deg) scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-list {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .video-item {
+            position: relative;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transform: scale(1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .video-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-item iframe {
+            width: 100%;
+            height: 150px;
+            border: none;
+            pointer-events: none;
+        }
+
+        .video-item button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(30, 144, 255, 0.8);
+            color: #fff;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 18px;
+            cursor: pointer;
+            outline: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .video-item button:hover {
+            background: rgba(30, 144, 255, 1);
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .main-video iframe {
+                height: 300px;
+            }
+            .video-item iframe {
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-video, .video-list {
+                flex: 1 100%;
+            }
+            .main-video iframe {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Futuristic Video Hub
+    </header>
+    <main>
+        <div class="main-video">
+            <iframe id="bigVideo" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+        </div>
+        <div class="video-list">
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+                <button onclick="switchVideo(this)">▶</button>
+            </div>
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/3JZ_D3ELwOQ"></iframe>
+                <button onclick="switchVideo(this)">▶</button>
+            </div>
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/L_jWHffIx5E"></iframe>
+                <button onclick="switchVideo(this)">▶</button>
+            </div>
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/ZZ5LpwO-An4"></iframe>
+                <button onclick="switchVideo(this)">▶</button>
+            </div>
+        </div>
+    </main>
+    <script>
+        function switchVideo(button) {
+            const bigVideo = document.getElementById('bigVideo');
+            const videoItem = button.parentElement;
+            const iframe = videoItem.querySelector('iframe');
+            const currentSrc = bigVideo.src;
+            bigVideo.src = iframe.src;
+            iframe.src = currentSrc;
+        }
+    </script>
+</body>
+</html>

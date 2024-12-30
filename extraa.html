@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube-like Webpage</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+        }
+        header {
+            background-color: #1e90ff;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            font-size: 1.5em;
+        }
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 10px;
+        }
+        .main-video {
+            flex: 3;
+            padding: 10px;
+        }
+        .main-video iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            border-radius: 8px;
+        }
+        .video-list {
+            flex: 1;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .video-item {
+            position: relative;
+        }
+        .video-item iframe {
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+        .video-item button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(30, 143, 255, 0);
+            color: white;
+            border: none;
+            border-radius: 0%;
+            width: 100%;
+            height: 100%;
+            font-size: 16px;
+            cursor: pointer;
+            outline: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        @media (max-width: 768px) {
+            .main-video iframe {
+                height: 300px;
+            }
+            .video-list iframe {
+                height: 80px;
+            }
+        }
+        @media (max-width: 480px) {
+            .main-video, .video-list {
+                flex: 1 100%;
+            }
+            .main-video iframe {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        My Video Platform
+    </header>
+    <main>
+        <div class="main-video">
+            <iframe id="bigVideo" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+        </div>
+        <div class="video-list">
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+                <button onclick="switchVideo(this)">▶</button>
+            </div>
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/3JZ_D3ELwOQ"></iframe>
+                <button onclick="switchVideo(this)">▶</button>
+            </div>
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/L_jWHffIx5E"></iframe>
+                <button onclick="switchVideo(this)">▶</button>
+            </div>
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/ZZ5LpwO-An4"></iframe>
+                <button onclick="switchVideo(this)">▶</button>
+            </div>
+        </div>
+    </main>
+    <script>
+        function switchVideo(button) {
+            const bigVideo = document.getElementById('bigVideo');
+            const videoItem = button.parentElement;
+            const iframe = videoItem.querySelector('iframe');
+            const currentSrc = bigVideo.src;
+            bigVideo.src = iframe.src;
+            iframe.src = currentSrc;
+        }
+    </script>
+</body>
+</html>
